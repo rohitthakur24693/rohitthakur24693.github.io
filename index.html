@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ai_Reels — Autonomous High-Stakes Science & Engineering Visualizer</title>
+    <meta name="description" content="Ai_Reels is an automated production and publishing engine creating viral 30-second 3D science and engineering marvel breakdowns.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #090d16;
+            --surface: #111827;
+            --surface-hover: #1f2937;
+            --border: rgba(255, 255, 255, 0.08);
+            --primary: #38bdf8;
+            --accent: #818cf8;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 24px;
+            width: 100%;
+        }
+        header {
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(12px);
+            background: rgba(9, 13, 22, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-badge {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #000;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--primary); }
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+        .hero-tag {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 0.825rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 640px;
+            margin: 0 auto 36px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+        .channel-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid var(--border);
+            transition: background 0.2s;
+        }
+        .channel-pill:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .features-section {
+            background: rgba(17, 24, 39, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 80px;
+        }
+        .features-section h2 {
+            font-size: 1.75rem;
+            margin-bottom: 24px;
+            color: #fff;
+        }
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .feature-icon {
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--primary);
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        footer {
+            margin-top: auto;
+            border-top: 1px solid var(--border);
+            padding: 32px 0;
+            background: rgba(9, 13, 22, 0.9);
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--primary); }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-content">
+            <a href="index.html" class="logo">
+                Ai_Reels <span class="logo-badge">ENGINE</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="hero-tag">AUTONOMOUS MULTI-CHANNEL ENGINE</div>
+            <h1>Visualizing Science & Engineering in 30 Seconds</h1>
+            <p>
+                Ai_Reels is an automated content production and distribution pipeline engineered by Rohit Thakur. It translates high-stakes engineering marvels into cinematic, high-retention 3D explainer reels for YouTube Shorts and Instagram Reels.
+            </p>
+        </section>
+
+        <section class="grid">
+            <div class="card">
+                <h3>🇮🇳 30 सेकंड ज्ञान (Hindi Channel)</h3>
+                <p>
+                    Explaining high-pressure physics, defense tech, and engineering breakthroughs in clean, accessible Hindi for over millions of curious minds across India.
+                </p>
+                <a href="https://youtube.com/@30secgyaan" target="_blank" rel="noopener noreferrer" class="channel-pill">
+                    ▶ YouTube @30secgyaan
+                </a>
+            </div>
+            <div class="card">
+                <h3>🇬🇧 Inside In 30 Sec (English Channel)</h3>
+                <p>
+                    Global engineering deep-dives calibrated for worldwide audiences, timed for peak US and European viewing windows with precision pacing.
+                </p>
+                <a href="https://youtube.com/@insidein30sec" target="_blank" rel="noopener noreferrer" class="channel-pill">
+                    ▶ YouTube @insidein30sec
+                </a>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <h2>How the Ai_Reels Automation Works</h2>
+            <div class="feature-item">
+                <div class="feature-icon">1</div>
+                <div>
+                    <strong style="color: #fff;">Curated Topic Generation</strong>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Focuses strictly on high-stakes engineering marvels (aerospace, ballistics, deep-sea survival, high-speed physics) with strict anti-repetition guards.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">2</div>
+                <div>
+                    <strong style="color: #fff;">3D Asset Synthesis & Rendering</strong>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Composes authentic vertical 1080x1920 visuals with real-time text-to-speech synchronization and dynamic kinetic typography.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">3</div>
+                <div>
+                    <strong style="color: #fff;">Secure Autonomous Publishing</strong>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Directly delivers finished videos to YouTube Shorts and Meta Instagram Graph API utilizing encrypted OAuth2 credentials without storing or reselling user data.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div>
+                © 2026 Ai_Reels. Engineered by Rohit Thakur. All rights reserved.
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="mailto:rohit.thakur24693@gmail.com">Contact Support</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
